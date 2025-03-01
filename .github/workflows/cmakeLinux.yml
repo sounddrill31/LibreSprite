@@ -37,7 +37,7 @@ jobs:
         cd build/bin
         export ARCH="$(uname -m)"
         sh ../../package_linux.sh
-        mv ./LibreSprite-anylinux-$(ARCH).AppImage ../../
+        mv ./LibreSprite-anylinux-$ARCH.AppImage ../../
     - name: Archive production artifacts
       uses: actions/upload-artifact@v4
       with:
