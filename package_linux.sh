@@ -13,7 +13,6 @@ mkdir -p LibreSprite/usr/bin
 mv ../../desktop/libresprite.desktop LibreSprite/
 cp ../../desktop/icons/hicolor/256x256/apps/libresprite.png LibreSprite/libresprite.png
 
-mv data LibreSprite/usr/bin
 mv *.so* LibreSprite/usr/lib
 
 # Create AppImage with lib4bin and Sharun
@@ -30,6 +29,11 @@ xvfb-run -a -- ./lib4bin -p -v -e -r -k -w \
 ln ./sharun ./AppRun 
 ./sharun -g
 )
+
+# Maybe the data folder is being read during initial run
+# This lets the run complete with expected original locations and then
+# copies it over afterwards using the below command
+mv ../data usr/bin
 
 wget "https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-$ARCH.AppImage" -O appimagetool
 chmod +x ./appimagetool
