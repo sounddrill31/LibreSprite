@@ -2,9 +2,9 @@ name: Linux
 
 on:
   push:
-    branches: [ master ]
+    branches: [ create-release-because-artefact-dl-is-slow ]
   pull_request:
-    branches: [ master ]
+    branches: [ create-release-because-artefact-dl-is-slow ]
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
@@ -45,3 +45,13 @@ jobs:
         name: libresprite-development-linux-x86_64
         path: LibreSprite-anylinux-x86_64.AppImage
         if-no-files-found: error
+
+    - name: Upload Release Asset (Linux/AppImage)
+      uses: softprops/action-gh-release@v1
+      with:
+        target_commitish: ${{ github.ref_name }}
+        files: LibreSprite*.AppImage
+        name: LibreSprite-${{ github.ref_name }}.AppImage
+        tag_name: ${{ github.run_id }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
