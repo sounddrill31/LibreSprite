@@ -8,10 +8,12 @@ ARCH="$(uname -m)"
 
 chmod +x libresprite
 
-mkdir -p LibreSprite
+mkdir -p LibreSprite/usr/bin
 
 mv ../../desktop/libresprite.desktop LibreSprite/
 cp ../../desktop/icons/hicolor/256x256/apps/libresprite.png LibreSprite/libresprite.png
+
+mv data LibreSprite/usr/bin
 
 # Create AppImage with lib4bin and Sharun
 (
@@ -21,7 +23,6 @@ wget "https://raw.githubusercontent.com/VHSgunzo/sharun/refs/heads/main/lib4bin"
 chmod +x ./lib4bin
 xvfb-run -a -- ./lib4bin -p -v -e -r -k -w \
   ../libresprite \
-  ../data \
   ../*.so* \
   /usr/lib/libpthread.so* \
   /usr/lib/librt.so* \
