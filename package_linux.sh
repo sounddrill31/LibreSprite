@@ -3,6 +3,8 @@
 
 out=$(pwd)
 src=$(pwd)
+APP="LibreSprite"
+ARCH="$(uname -m)"
 
 chmod +x libresprite
 
@@ -26,3 +28,9 @@ xvfb-run -a -- ./lib4bin -p -v -e -r -k -w \
 ln ./sharun ./AppRun 
 ./sharun -g
 )
+
+wget "https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-$ARCH.AppImage" -O appimagetool
+chmod +x ./appimagetool
+./appimagetool --comp zstd \
+	--mksquashfs-opt -Xcompression-level --mksquashfs-opt 22 \
+	-n "$out"/LibreSprite "$out"/"$APP"-anylinux-"$ARCH".AppImage
