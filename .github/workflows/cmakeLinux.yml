@@ -39,8 +39,9 @@ jobs:
         sh ../../package_linux.sh
         mv ./LibreSprite-anylinux-$ARCH.AppImage ../../
     - name: Archive production artifacts
+      if: runner.arch == 'X64'
       uses: actions/upload-artifact@v4
       with:
-        name: libresprite-development-linux-*
-        path: LibreSprite-*.AppImage
+        name: libresprite-development-linux-x86_64
+        path: LibreSprite-anylinux-x86_64.AppImage
         if-no-files-found: error
