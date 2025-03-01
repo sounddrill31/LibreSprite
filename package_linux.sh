@@ -33,7 +33,7 @@ ln ./sharun ./AppRun
 # Maybe the data folder is being read during initial run
 # This lets the run complete with expected original locations and then
 # copies it over afterwards using the below command
-mv ../data bin
+mv "$out"/data "$out"/LibreSprite/bin
 
 wget "https://github.com/AppImage/appimagetool/releases/download/continuous/appimagetool-$ARCH.AppImage" -O appimagetool
 chmod +x ./appimagetool
