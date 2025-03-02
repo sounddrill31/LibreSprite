@@ -16,7 +16,10 @@ jobs:
     # well on Windows or Mac.  You can convert this to a matrix build if you need
     # cross-platform coverage.
     # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest,ubuntu-24.04-arm]
 
     steps:
     - uses: actions/checkout@v3
@@ -38,10 +41,17 @@ jobs:
         export ARCH="$(uname -m)"
         sh ../../package_linux.sh
         mv ./LibreSprite-anylinux-$ARCH.AppImage ../../
-    - name: Archive production artifacts
+    - name: Archive production artifacts(x86_64)
       if: runner.arch == 'X64'
       uses: actions/upload-artifact@v4
       with:
         name: libresprite-development-linux-x86_64
         path: LibreSprite-anylinux-x86_64.AppImage
+        if-no-files-found: error
+    - name: Archive production artifacts(aarch64)
+      if: runner.arch == 'ARM64'
+      uses: actions/upload-artifact@v4
+      with:
+        name: libresprite-development-linux-aarch64
+        path: LibreSprite-anylinux-aarch64.AppImage
         if-no-files-found: error
