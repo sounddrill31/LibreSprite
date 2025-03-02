@@ -55,3 +55,13 @@ jobs:
         name: libresprite-development-linux-aarch64
         path: LibreSprite-anylinux-aarch64.AppImage
         if-no-files-found: error
+
+    - name: Upload Release Asset (Linux/AppImage)
+      uses: softprops/action-gh-release@v1
+      with:
+        target_commitish: ${{ github.ref_name }}
+        files: LibreSprite*.AppImage
+        name: LibreSprite-${{ github.ref_name }}.AppImage
+        tag_name: ${{ github.run_id }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
