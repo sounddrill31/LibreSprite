@@ -2,7 +2,7 @@ name: Linux
 
 on:
   push:
-    branches: [ master ]
+    branches: [ actions-bleeding-edge-2 ]
   pull_request:
     branches: [ master ]
 
